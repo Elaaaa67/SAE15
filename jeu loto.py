@@ -1,15 +1,17 @@
 
-l1 =[]
-x = 0
-
-if x< 5 :
-    n = (int(input("Entrez un nombre entre 1 et 45:")))
-    for i in range (l1):
-    x = x+1
-else x > 5
-    print("voici vos nombre:"{l1})
-
 from numpy.random import randint
-print(randint(1,45,5))
+import numpy as np
+
+y = int(input("Seed:"))
+n = int(input("Entrez le nombre de tirages que vous voulez:"))
+
+np.ramdom.seed(y)
+
+for i in range (n)
+    s= np.ramdom.choice(range(1,45),5, replace= false)
+    s = list(s)
+    print("Le tirage est :",s)
+
+
 
 
