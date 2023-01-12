@@ -1,52 +1,40 @@
 from numpy.random import randint
 import numpy as np
 
-tab= [0, 0, 0, 0, 0]
-#y = int(input("Seed:"))
-
-
+y = int(input("Seed:"))
 np.random.seed(0)
-
-
-
 
 #tri cocktail
 def cocktailSort(a):
-    swapped = True
+    retour = True
     n = len(a)
-    start = 0
-    end = n-1
-    while (swapped==True):
+    debut = 0
+    fin = n-1
+    while (retour==True):
+        retour = False
+        #les retours pertmets de changer de direction a chaque fois qu'une passes a été faites.
+        #Premiere loop pour les passes de la droite a la gauche.
+        #Ce qui permet de mettre les nombres les plus grand au debut c'est a dire à droite.
 
-        swapped = False
-
-        for i in range(start,end):
+        for i in range(debut,fin):
             if (a[i] > a[i + 1]):
                 a[i], a[i + 1] = a[i + 1], a[i]
-                swapped = True
-
-        if (swapped == False):
+                retour = True
+        if (retour == False):
             break
+        retour = False
 
-        swapped = False
+        fin = fin - 1
 
-            # move the end point back by one, because
-            # item at the end is in its rightful spot
-        end = end - 1
-
-            # from right to left, doing the same
-            # comparison as in the previous stage
-        for i in range(end - 1, start - 1, -1):
+        #deuxieme loop pour les passes de gauche a droit
+        #ce qui permet de mettre les nombres les plus petit au début c'est a dire à la gauche
+        for i in range(fin - 1, debut - 1, -1):
             if (a[i] > a[i + 1]):
                 a[i], a[i + 1] = a[i + 1], a[i]
-                swapped = True
-
-            # increase the starting point, because
-            # the last stage would have moved the next
-            # smallest number to its rightful spot.
-            start = start + 1
+                retour = True
+            debut = debut + 1
     return a
-        # Driver code to test above
+        #Return permet de renvoyer la valeur pour pouvoir la récuperer et la skocker dans une variable
 
 
 
@@ -56,4 +44,5 @@ if __name__ == '__main__':
         a = np.random.choice(range(1, 45), 5, replace=False)
         a = list(a)
         print("Le tirage est :", a)
-        print("Tirage triée:",cocktailSort(a))
+        print("Tirage triée:", cocktailSort(a))
+
