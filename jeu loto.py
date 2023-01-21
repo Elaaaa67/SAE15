@@ -1,5 +1,6 @@
 from numpy.random import randint
 import numpy as np
+import json
 
 y = int(input("Seed:"))
 np.random.seed(0)
@@ -36,13 +37,24 @@ def cocktailSort(a):
     return a
         #Return permet de renvoyer la valeur pour pouvoir la récuperer et la skocker dans une variable
 
-
+def Sauv_Json(data, nom_fichier):
+    data = [int(i) for i in data]
+    with open(nom_fichier, 'a') as f:
+       json.dump(data, f)
+    print("SAUVEGARDE JSON")
 
 if __name__ == '__main__':
     x = int(input("Entrez le nombre de tirages que vous voulez:"))
     for i in range(x):
         a = np.random.choice(range(1, 45), 5, replace=False)
         a = list(a)
+        print(a)
+        Sauv_Json(a,"tirage.json")
         print("Le tirage est :", a)
         print("Tirage triée:", cocktailSort(a))
 
+#with open("cocktailshort.json", "w") as f:
+ #   json.dump(cocktailSort(a), f)
+
+#j = json.dumps(list(cocktailSort(a)))
+#print(j)
