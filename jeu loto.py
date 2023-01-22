@@ -1,9 +1,10 @@
 from numpy.random import randint
 import numpy as np
-import json
+import json #pour la sauvegarde
+import matplotlib.pyplot as plt #histogramme
 
 y = int(input("Seed:"))
-np.random.seed(0)
+np.random.seed(y) # generation de la graine
 
 #tri cocktail
 def cocktailSort(a):
@@ -37,21 +38,23 @@ def cocktailSort(a):
     return a
         #Return permet de renvoyer la valeur pour pouvoir la récuperer et la skocker dans une variable
 
-def Sauv_Json(data, nom_fichier):
+def sjson(data, nom_fichier):
     data = [int(i) for i in data]
     with open(nom_fichier, 'a') as f:
        json.dump(data, f)
-    print("SAUVEGARDE JSON")
+
 
 if __name__ == '__main__':
     x = int(input("Entrez le nombre de tirages que vous voulez:"))
     for i in range(x):
         a = np.random.choice(range(1, 45), 5, replace=False)
         a = list(a)
-        print(a)
-        Sauv_Json(a,"tirage.json")
-        print("Le tirage est :", a)
+        sjson(a,"tirage.json")
+        print(f"Le tirage {i+1} est :", a)
         print("Tirage triée:", cocktailSort(a))
+print("La sauvegarde a été faites")
+plt.hist(cocktailSort(a), bins=x)
+plt.savefig("test.pdf")
 
 #with open("cocktailshort.json", "w") as f:
  #   json.dump(cocktailSort(a), f)
